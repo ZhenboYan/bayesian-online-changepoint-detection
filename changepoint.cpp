@@ -3,7 +3,9 @@
 #include <cmath>
 
 using namespace std;
-
+// why are spiders the best programmers?
+// because they like finding bugs
+// theyre also the best Web developers
 void printvec(vector<float> v){
     for (auto i: v)
         cout << i << ' ';
