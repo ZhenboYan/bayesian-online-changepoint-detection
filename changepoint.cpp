@@ -70,18 +70,6 @@ vector<float> sub_all(const vector<float> &v1, const float &num){
     return v;
 }
 
-vector<float> gammaln(const vector<float> &v1){
-    vector<float> v;
-    vector<float>::const_iterator it1 = v1.begin();
-    float solu;
-    for (int i = 0; i < v1.size();++i){
-        solu = log(tgamma(*it1));
-        v.push_back(solu);
-        it1++;
-    }
-    return v;
-}
-
 vector<float> expvec(const vector<float> &v1){
     vector<float> v;
     vector<float>::const_iterator it1 = v1.begin();
@@ -122,8 +110,8 @@ vector<float> cal_c(const vector<float> &v2,const vector<float> &v3){
     for (int i = 0; i < v2.size();++i){
         div2 = *nu / 2;
         add05 = div2 + 0.5;
-        gl1 = log(tgamma(add05));
-        gl2 = log(tgamma(div2));
+        gl1 = lgamma(add05);
+        gl2 = lgamma(div2);
         part3 = exp(gl1 - gl2);
         mul_pi = *nu * M_PI;
         mul_var = mul_pi * *var;
@@ -158,9 +146,30 @@ vector<float> studentpdf(const float &x, const vector<float> &mu, const vector<f
     return v;
 }
 
+vector<float> printcal_c(const vector<float> &v2,const vector<float> &v3){
+    vector<float> v;
+    vector<float>::const_iterator var = v2.begin();
+    vector<float>::const_iterator nu = v3.begin();
+    float div2,add05,gl1,gl2,part3,mul_pi,mul_var,part4;
+    for (int i = 0; i < v2.size();++i){
+        div2 = *nu / 2;
+        add05 = div2 + 0.5;
+        gl1 = lgamma(add05);
+        gl2 = lgamma(div2);
+        part3 = exp(gl1 - gl2);
+        mul_pi = *nu * M_PI;
+        mul_var = mul_pi * *var;
+        part4 = pow(mul_var,-0.5);
+        v.push_back(part3*part4);
+        var++;
+        nu++;
+    }
+    return v;
+}
+
 vector<float> printstudentpdf(const float &x, const vector<float> &mu, const vector<float> &var, const vector<float> &nu){
     vector<float> v;
-    vector<float> cc = cal_c(var,nu);
+    vector<float> cc = printcal_c(var,nu);
     vector<float>::const_iterator va = var.begin();
     vector<float>::const_iterator n = nu.begin();
     vector<float>::const_iterator m = mu.begin();
@@ -173,7 +182,7 @@ vector<float> printstudentpdf(const float &x, const vector<float> &mu, const vec
         part7 = (part5 * part6)+1;
         part8 = pow(part7,(-(*n + 1) / 2));
         v.push_back(*c * part8);
-        cout << *c << " " << part8 << endl;
+        // cout << *c << " " << part8 << endl;
         
         va++;
         n++;
@@ -365,9 +374,9 @@ int main() {
             j++;
         }
         
-        // if (t==67)
-        //     // print_matrix(matrix);
-        //     printvec(assign2);
+        if (t==349)
+            // print_matrix(matrix);
+            printvec(assign2);
             
             // MATLAB
             // muT0    = [ mu0    ; (kappaT.*muT + X(t)) ./ (kappaT+1) ];
