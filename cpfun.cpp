@@ -187,12 +187,13 @@ int max_index(const std::vector<float> &v){
     return index;
 }
 
+// self update variables
 static int end = 350;
 static std::vector<float> data;
-static std::vector<float> kappaT = {1};
-static std::vector<float> alphaT = {1};
-static std::vector<float> maxes(end+1, 1); //PASSED INTO FUNCTION
-static std::vector<std::vector<float>> matrix; //PASSED INTO FUNCTION
+static std::vector<float> kappaT = {1}; // the past doesn't change
+static std::vector<float> alphaT = {1}; // the past doesn't change
+static std::vector<float> maxes(end+1, 1); 
+static std::vector<std::vector<float>> matrix;
 static std::vector<float> ht = {0};
 
 bool detection(bool initialization, float datapoint,int t) {
@@ -201,8 +202,9 @@ bool detection(bool initialization, float datapoint,int t) {
         exit(EXIT_SUCCESS);    
     }
 
-    std::vector<float> muT = {0}; 
-    std::vector<float> betaT  = {1};
+    // anything depends on these two will be updated because past chagnes
+    std::vector<float> muT = {0}; // the past changes
+    std::vector<float> betaT  = {1};// the past changes
 
     if (initialization){
         for (float i = 0; i < end+1; i++){
