@@ -17,7 +17,7 @@
 //     }
 // }
 
-// self update variables
+// allocate at once no more dynamic allocation
 static int end = 350;
 static std::vector<float> data,maxes,selection;
 static std::vector<float> alphaT,betaT,muT,kappaT;
@@ -68,8 +68,6 @@ bool detection(float datapoint,int t) {
         var[i] = ((kappaT[i] + 1) * betaT[i])/(kappaT[i] * alphaT[i]);
     
     float part5,part6,part7,part8,n,add05,gl1,gl2,partc1,mul_pi,mul_var,partc2,c;
-    if (t==10)
-        printvec(betaT);
         
     // predprobs = studentpdf(data[t],muT,var,alphaT);
     for (int i=0;i<t+1;i++){
