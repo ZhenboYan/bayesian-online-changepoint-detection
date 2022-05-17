@@ -1,28 +1,3 @@
-///*
-// * test.cpp
-// *
-// *  Created on: May 6, 2022
-// *      Author: user
-// */
-//
-//// Algorithm comes here
-//
-//
-//
-//#include <test.hpp>
-//#include <vector>
-//static std::vector<int> a;
-////
-//int junk(int input)
-//{
-//	a[0] = 3;
-//	return a[0];
-//}
-//
-//
-//void initialize_vector(int len){
-//	a = std::vector<int> (len,0);
-//}
 #include <test.hpp>
 #include <vector>
 #include <cmath>
